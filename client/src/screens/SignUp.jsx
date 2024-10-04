@@ -1,6 +1,7 @@
 // SignUp.js
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [name, setName] = useState('');
@@ -8,18 +9,41 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const Navigate = useNavigate()
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
+    setErrorMessage(''); // Clear previous error messages
+    setSuccessMessage(''); // Clear previous success messages
 
     // Perform sign-up logic (e.g., API call)
     if (name && email && password && confirmPassword) {
       if (password === confirmPassword) {
-        console.log('Signing up', { name, email, password });
-        setErrorMessage('');
-        // Redirect to sign-in page or dashboard after successful sign-up
+        try {
+          const response = await fetch('http://localhost:3300/auth/signup', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, email, password }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            setSuccessMessage(data.message);
+            Navigate('/')
+
+          } else {
+            setErrorMessage(data.message || 'Sign-up failed.');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          setErrorMessage('Server error. Please try again later.');
+        }
       } else {
         setErrorMessage("Passwords don't match.");
       }
@@ -33,6 +57,7 @@ const SignUp = () => {
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-bold text-center text-teal-700 mb-4">Sign Up</h2>
         {errorMessage && <p className="text-red-500 text-sm text-center">{errorMessage}</p>}
+        {successMessage && <p className="text-green-500 text-sm text-center">{successMessage}</p>}
         <form onSubmit={handleSignUp}>
           <div className="mb-4">
             <label className="block text-gray-700 mb-2">Name:</label>

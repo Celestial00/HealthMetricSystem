@@ -1,26 +1,18 @@
-const express = require('express')
-const HomeRouter = require('./Routes/HomeRouter')
-const app = express()
-
-
-app.get('/', (req , res) =>{
-
-
-    res.send("hell world")
-} ) 
-
-
+const express = require("express");
+const Db = require("./DatabaseConfig");
+const Auth = require("./Routes/Auth");
+const cors = require('cors');
+const app = express();
+require("dotenv").config();
 
 
 //Middleware
 
-app.use('/index', HomeRouter)
+app.use(cors());
+app.use(express.json());
+app.use('/auth',Auth);
 
-
-
-app.listen(3300, ()=>{
-
-    console.log(`runing on port ${3300}`);
-    
-
-})
+app.listen(3300, () => {
+  Db();
+  console.log(`runing on port ${3300}`);
+});

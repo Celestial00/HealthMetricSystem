@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "chart.js": "^4.4.4",
+    "cors": "^2.8.5",
+    "dotconfig": "^0.0.1-security",
+    "dotenv": "^16.4.5",
+    "js-cookie": "^3.0.5",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
