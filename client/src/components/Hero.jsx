@@ -73,6 +73,14 @@ const Hero = () => {
             </button>
           </Link>
 
+          
+          <Link to={`/reminder/${userId}`}>
+          <button className="bg-white ml-3 border-[1px] text-teal-600 font-semibold py-2 px-6 rounded-lg hover:text-white hover:bg-teal-500 transition duration-300">
+              Set A Reminder
+            </button>
+
+          </Link>
+
           {error && <p className="text-red-600 mt-4">{error}</p>}
         </div>
       </div>

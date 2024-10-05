@@ -15,7 +15,7 @@ const healthLogSchema = new mongoose.Schema({
     required: true
   },
   bloodPressure: {
-    type: Number,
+    type: String,
     required: true
   },
   date: {
