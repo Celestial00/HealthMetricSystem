@@ -1,6 +1,7 @@
 // HealthLog.js
 import React, { useState } from 'react';
 import { FaHeartbeat, FaTachometerAlt, FaMedkit } from 'react-icons/fa'; // Change FaSugar to FaMedkit
+import { useParams } from 'react-router-dom';
 
 const HealthLog = () => {
   const [heartRate, setHeartRate] = useState('');
@@ -8,17 +9,44 @@ const HealthLog = () => {
   const [bloodPressure, setBloodPressure] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [userId , setUserId ] = useState('')
+  const { id } = useParams(); // Extracting userId from URL
 
-  const handleSubmit = (e) => {
+
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    setUserId(id)
 
     if (heartRate && sugarLevel && bloodPressure) {
-      console.log('Logging health data', { heartRate, sugarLevel, bloodPressure });
-      setSuccessMessage('Health data logged successfully!');
-      setErrorMessage('');
-      setHeartRate('');
-      setSugarLevel('');
-      setBloodPressure('');
+      try {
+        const response = await fetch('http://localhost:3300/api/log', {
+          method: 'POST',  // Specify method
+          headers: {
+            'Content-Type': 'application/json',  // Specify content type
+          },
+          body: JSON.stringify({
+            userId,               // Include the user ID in the request
+            heartRate,
+            sugarLevel,
+            bloodPressure,
+          }),  // Send the data as JSON in the body
+        });
+  
+        if (response.ok) {  // Check if the request was successful
+          setSuccessMessage('Health data logged successfully!');
+          setErrorMessage('');
+          setHeartRate('');
+          setSugarLevel('');
+          setBloodPressure('');
+        } else {
+          throw new Error('Failed to log data');
+        }
+      } catch (error) {
+        console.error('Error logging data', error);
+        setErrorMessage('An error occurred while logging health data.');
+      }
     } else {
       setErrorMessage('Please fill in all fields.');
       setSuccessMessage('');
@@ -57,7 +85,7 @@ const HealthLog = () => {
           <div className="mb-4 flex items-center border border-gray-300 rounded">
             <FaTachometerAlt className="text-teal-600 ml-3" />
             <input
-              type="text"
+              type="number"
               value={bloodPressure}
               onChange={(e) => setBloodPressure(e.target.value)}
               required

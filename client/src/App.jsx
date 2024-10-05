@@ -1,10 +1,11 @@
 // App.js
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignIn from "./screens/SignIn";
-import SignUp from "./screens/SignUp"; // Assuming you meant SignOut here
+import SignUp from "./screens/SignUp";
 import Home from "./screens/Home";
-import HealthLog from "./components/HealthLog";
+import HealthLog from "./screens/HealthLog";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   return (
@@ -12,8 +13,22 @@ const App = () => {
       <Routes>
         <Route path="/" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/home/:id" element={<Home />} />
-        <Route path="logs" element={<HealthLog/>}/>
+        <Route
+          path="/home/:id"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/logs/:id"
+          element={
+            <PrivateRoute>
+              <HealthLog />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );

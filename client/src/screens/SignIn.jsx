@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Cookies from "js-cookie"; // Import the js-cookie library
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -36,7 +36,6 @@ const SignIn = () => {
         const data = await response.json();
         console.log("Sign-in successful:", data);
         Cookies.set("userId", data.userId, { expires: 30 });
-
         Navigate(`/home/${data.userId}`);
       } catch (error) {
         console.error("Error during sign-in:", error);
@@ -92,6 +91,7 @@ const SignIn = () => {
           >
             Sign In
           </button>
+       <Link to='/signup' >    <p className=" text-center mt-4 cursor-pointer hover:text-teal-700 ">Not Signed In Yet? click here! </p> </Link>
         </form>
       </div>
     </div>
