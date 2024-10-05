@@ -12,8 +12,8 @@ const MetricsControllerLog = async (req, res) => {
       const newLog = new HealthLog({ userId, heartRate, sugarLevel, bloodPressure });
       await newLog.save();
       res.status(201).json({ message: 'Health data logged successfully', data: newLog });
-    } catch (error) {
-      res.status(500).json({ error: 'Server error' });
+    } catch (err) {
+      res.status(500).json({ error: 'Server error' + err });
     }
   }
 
@@ -23,7 +23,7 @@ const MetricsControllerLog = async (req, res) => {
       const logs = await HealthLog.find({ userId: req.params.userId });
       res.status(200).json(logs);
     } catch (error) {
-      res.status(500).json({ error: 'Server error' });
+      res.status(500).json({ error: 'Server error ' });
     }
   }
 

@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const healthLogSchema = new mongoose.Schema({
   userId: {
-    type: mongoose.Schema.Types.ObjectId, // Assuming userId will be a MongoDB ObjectId
+    type: String, // Assuming userId will be a MongoDB ObjectId
     required: true,
-    ref: 'User' // Assuming there's a User model
+     // Assuming there's a User model
   },
   heartRate: {
     type: Number,

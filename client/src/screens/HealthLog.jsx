@@ -9,32 +9,32 @@ const HealthLog = () => {
   const [bloodPressure, setBloodPressure] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const [userId , setUserId ] = useState('')
-  const { id } = useParams(); // Extracting userId from URL
+  const { id } = useParams(); 
 
 
   
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    setUserId(id)
-
+    // Use id directly from useParams
+    console.log(id);
+  
     if (heartRate && sugarLevel && bloodPressure) {
       try {
         const response = await fetch('http://localhost:3300/api/log', {
-          method: 'POST',  // Specify method
+          method: 'POST',
           headers: {
-            'Content-Type': 'application/json',  // Specify content type
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            userId,               // Include the user ID in the request
+            userId: id,   // Use the id from useParams here
             heartRate,
             sugarLevel,
             bloodPressure,
-          }),  // Send the data as JSON in the body
+          }),
         });
   
-        if (response.ok) {  // Check if the request was successful
+        if (response.ok) {
           setSuccessMessage('Health data logged successfully!');
           setErrorMessage('');
           setHeartRate('');
