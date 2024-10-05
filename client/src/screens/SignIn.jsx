@@ -1,5 +1,5 @@
 // SignIn.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Cookies from "js-cookie"; // Import the js-cookie library
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +10,9 @@ const SignIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const Navigate = useNavigate();
+
+
+  useEffect(() =>{},[])
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -81,7 +84,7 @@ const SignIn = () => {
                 className="absolute right-3 cursor-pointer"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                {showPassword ?  <FaEye /> :  <FaEyeSlash />}
               </button>
             </div>
           </div>

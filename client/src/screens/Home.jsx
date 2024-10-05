@@ -4,6 +4,7 @@ import Hero from "../components/Hero";
 import Metrics from "../components/Metrics";
 import Navbar from "../components/Navbar";
 import Cookies from "js-cookie";
+import HealthMetricsTable from "../components/HealthMetricsTable";
  
 
 
@@ -26,6 +27,7 @@ export default function Home() {
         <Hero  />
         <Metrics />
         <HealthChart />
+        <HealthMetricsTable/>
       </div>
     </>
   );

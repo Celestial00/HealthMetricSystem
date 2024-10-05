@@ -99,7 +99,7 @@ const SignUp = () => {
                 className="flex items-center justify-center p-2 cursor-pointer"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                {showPassword ?  <FaEye /> : <FaEyeSlash />}
               </span>
             </div>
           </div>
@@ -127,7 +127,7 @@ const SignUp = () => {
                 className="flex items-center justify-center p-2 cursor-pointer"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
-                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                {showConfirmPassword ?  <FaEye /> :  <FaEyeSlash /> }
               </span>
             </div>
           </div>
