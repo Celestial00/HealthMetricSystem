@@ -7,6 +7,7 @@ import Home from "./screens/Home";
 import HealthLog from "./screens/HealthLog";
 import PrivateRoute from "./components/PrivateRoute";
 import SetReminder from "./screens/SetReminder";
+import TrendsPage from "./screens/TrendsPage";
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/reminder/:id" element={<SetReminder />} />
+        <Route path="/trends" element={<TrendsPage/>} />
         <Route
           path="/home/:id"
           element={
