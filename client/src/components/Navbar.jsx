@@ -25,15 +25,13 @@ const Navbar = (params) => {
 
  
         <div>
-        <Link to={`/logs/${params.UserId}`}>  <button className="bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-teal-700 transition duration-300">
-            Log Patient Metrics
-          </button></Link>
+   
 
           <Link to={`/trends`}>  <button className="bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-teal-700 transition duration-300">
             Trends
           </button></Link>
 
-          <button className="bg-teal-600 text-white font-semibold ml-3 py-2 px-4 rounded-lg hover:bg-teal-700 transition duration-300" onClick={HandleSignOut} >
+          <button className="bg-teal-600 text-white font-semibold ml-1 py-2 px-4 rounded-lg hover:bg-teal-700 transition duration-300" onClick={HandleSignOut} >
             Sign Out
           </button>
         

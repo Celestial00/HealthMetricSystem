@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams , useNavigate } from "react-router-dom";
 
 const SetReminder = () => {
   const [email, setEmail] = useState("");
@@ -8,6 +8,7 @@ const SetReminder = () => {
   const [description, setDescription] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const Navigate = useNavigate()
   const { id } = useParams();
 
   const handleSubmit = async (e) => {
@@ -36,6 +37,10 @@ const SetReminder = () => {
           setReminderDate("");
           setReminderTime("");
           setDescription("");
+
+          alert('added to Reminders')
+          Navigate(`/home/${id}`)
+
         } else {
           throw new Error("Failed to set reminder");
         }
