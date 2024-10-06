@@ -22,4 +22,21 @@ const ReminderController = async (req, res) => {
     }
   }
 
-  module.exports = ReminderController
+  const ReminderGetController = async (req ,res) =>{
+    const Id = req.params.id
+    try{
+      const response = await Reminder.find({userId : Id})
+      if(response.length === 0){
+       return res.status(201).json({msg: "no reminders found for user"})
+      }
+      res.status(200).json(response)
+    }
+    catch(err){
+      res.status(500).json({'internal server error': err})
+    }
+
+
+  }
+
+
+  module.exports = {ReminderController , ReminderGetController}

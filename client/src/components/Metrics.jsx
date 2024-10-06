@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Reminders from './Reminders'; // Import the Reminders component
 
 const Metrics = ({ MetricData = [] }) => {
   const [todayMetrics, setTodayMetrics] = useState(null);
@@ -21,6 +22,12 @@ const Metrics = ({ MetricData = [] }) => {
     }
   }, [MetricData]);
 
+  const reminders = [
+    { task: 'Take medication', time: '8:00 AM' },
+    { task: 'Check blood pressure', time: '12:00 PM' },
+    { task: 'Exercise', time: '6:00 PM' },
+  ];
+
   if (!todayMetrics) {
     return (
       <div className="text-center mt-10">
@@ -30,9 +37,11 @@ const Metrics = ({ MetricData = [] }) => {
   }
 
   return (
-    <section className="bg-white py-16"> {/* Changed background to white */}
+    <section className="bg-white py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-teal-800 text-center mb-12">Your Health Metrics for {getDayOfWeek(new Date())}</h2>
+        <h2 className="text-4xl font-bold text-teal-800 text-center mb-12">
+          Your Health Metrics for {getDayOfWeek(new Date())}
+        </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Metrics Boxes */}
@@ -62,32 +71,8 @@ const Metrics = ({ MetricData = [] }) => {
             </div>
           </div>
 
-          {/* Reminder Table */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h3 className="text-2xl font-bold text-teal-700 mb-6">Reminders</h3>
-            <table className="table-auto w-full text-left">
-              <thead>
-                <tr className="text-teal-700">
-                  <th className="px-4 py-2 text-xl">Task</th>
-                  <th className="px-4 py-2 text-xl">Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="hover:bg-gray-100 transition-colors duration-200">
-                  <td className="border px-4 py-2">Take medication</td>
-                  <td className="border px-4 py-2">8:00 AM</td>
-                </tr>
-                <tr className="hover:bg-gray-100 transition-colors duration-200">
-                  <td className="border px-4 py-2">Check blood pressure</td>
-                  <td className="border px-4 py-2">12:00 PM</td>
-                </tr>
-                <tr className="hover:bg-gray-100 transition-colors duration-200">
-                  <td className="border px-4 py-2">Exercise</td>
-                  <td className="border px-4 py-2">6:00 PM</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+         
+          <Reminders reminders={reminders} />
         </div>
       </div>
     </section>
