@@ -8,6 +8,7 @@ import HealthLog from "./screens/HealthLog";
 import PrivateRoute from "./components/PrivateRoute";
 import SetReminder from "./screens/SetReminder";
 
+
 const App = () => {
   return (
     <Router>

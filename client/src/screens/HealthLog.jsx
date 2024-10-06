@@ -11,14 +11,12 @@ const HealthLog = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const { id } = useParams(); 
 
+  
 
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Use id directly from useParams
-    console.log(id);
-  
+
     if (heartRate && sugarLevel && bloodPressure) {
       try {
         const response = await fetch('http://localhost:3300/api/log', {

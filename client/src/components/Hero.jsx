@@ -49,7 +49,9 @@ const Hero = () => {
         <div className="md:w-1/2 flex justify-center flex-col item md:justify-start mb-8 md:mb-0">
           <FaUserCircle className="text-teal-600 text-9xl" />
           {/* Conditionally render user name only if userData is available */}
-          {userData && <h3 className="text-xl font-semibold">Welcome, {userData.name}</h3>}
+          {userData && (
+            <h3 className="text-xl font-semibold">Welcome, {userData.name}</h3>
+          )}
         </div>
 
         {/* Right: Patient Information and Features */}
@@ -73,12 +75,10 @@ const Hero = () => {
             </button>
           </Link>
 
-          
           <Link to={`/reminder/${userId}`}>
-          <button className="bg-white ml-3 border-[1px] text-teal-600 font-semibold py-2 px-6 rounded-lg hover:text-white hover:bg-teal-500 transition duration-300">
+            <button className="bg-white ml-3 border-[1px] text-teal-600 font-semibold py-2 px-6 rounded-lg hover:text-white hover:bg-teal-500 transition duration-300">
               Set A Reminder
             </button>
-
           </Link>
 
           {error && <p className="text-red-600 mt-4">{error}</p>}

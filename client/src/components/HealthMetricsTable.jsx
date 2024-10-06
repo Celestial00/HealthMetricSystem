@@ -1,19 +1,28 @@
 import { useState, useEffect } from "react";
 
-const HealthMetricsTable = () => {
+const HealthMetricsTable = ({ MetricData }) => {
   const [today, setToday] = useState("");
+  const [metricsData, setMetricsData] = useState([]);
 
-  // Function to get today's day
+  // Function to convert date to day of the week
+  const getDayOfWeek = (date) => {
+    const options = { weekday: 'long' };
+    return new Date(date).toLocaleDateString("en-US", options);
+  };
 
-  const metricsData = [
-    { day: "Monday", sugar: 98, bloodPressure: "120/80", heartRate: 72 },
-    { day: "Tuesday", sugar: 95, bloodPressure: "122/81", heartRate: 75 },
-    { day: "Wednesday", sugar: 105, bloodPressure: "118/79", heartRate: 70 },
-    { day: "Thursday", sugar: 110, bloodPressure: "130/85", heartRate: 78 },
-    { day: "Friday", sugar: 102, bloodPressure: "125/83", heartRate: 74 },
-    { day: "Saturday", sugar: 100, bloodPressure: "119/82", heartRate: 76 },
-    { day: "Sunday", sugar: 98, bloodPressure: "121/80", heartRate: 73 },
-  ];
+  useEffect(() => {
+    if (MetricData) {
+      // Map the received MetricData to the desired format for the table
+      const formattedMetrics = MetricData.map((metric) => ({
+        day: getDayOfWeek(metric.date),
+        sugar: metric.sugarLevel,
+        bloodPressure: metric.bloodPressure,
+        heartRate: metric.heartRate,
+      }));
+
+      setMetricsData(formattedMetrics);
+    }
+  }, [MetricData]);
 
   return (
     <section className="bg-white py-16">
