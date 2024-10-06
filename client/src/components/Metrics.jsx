@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Metrics = ({ MetricData }) => {
+const Metrics = ({ MetricData = [] }) => { // Default to empty array
   const [todayMetrics, setTodayMetrics] = useState(null);
 
   // Function to convert date to day of the week
@@ -10,15 +10,15 @@ const Metrics = ({ MetricData }) => {
   };
 
   useEffect(() => {
-    // Get the current day of the week
-    const currentDay = getDayOfWeek(new Date());
-
-    // Find today's metrics from MetricData
-    const todayData = MetricData.find((metric) => getDayOfWeek(metric.date) === currentDay);
-
-    // Set today's metrics in state
-    if (todayData) {
-      setTodayMetrics(todayData);
+   
+    if (Array.isArray(MetricData)) {
+      const currentDay = getDayOfWeek(new Date())
+      const todayData = MetricData.find((metric) => getDayOfWeek(metric.date) === currentDay);
+      if (todayData) {
+        setTodayMetrics(todayData);
+      }
+    } else {
+      console.error('MetricData is not an array:', MetricData);
     }
   }, [MetricData]);
 
