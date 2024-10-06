@@ -94,7 +94,7 @@ const HealthChart = ({ MetricData }) => {
   };
 
   return (
-    <section className="bg-teal-50 py-16">
+    <section className="bg-gradient-to-r from-teal-50 to-teal-100 py-16">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-teal-700 text-center mb-8">
           Health Metrics This Week
