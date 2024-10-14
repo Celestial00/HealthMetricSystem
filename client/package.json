@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "chart.js": "^4.4.4",
+    "client": "file:",
     "cors": "^2.8.5",
     "dotconfig": "^0.0.1-security",
     "dotenv": "^16.4.5",

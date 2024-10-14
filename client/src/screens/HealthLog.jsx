@@ -11,12 +11,38 @@ const HealthLog = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const { id } = useParams(); 
 
-  
+  // Blood pressure validation function
+  const validateBloodPressure = (input) => {
+    const bpRegex = /^\d+\/\d+$/; // Check format
+    if (!bpRegex.test(input)) {
+      return 'Invalid format. Please enter in "systolic/diastolic" format.';
+    }
 
-  
+    const [systolic, diastolic] = input.split("/").map(Number);
+    if (systolic <= diastolic) {
+      return 'Systolic must be greater than diastolic.';
+    }
+    if (systolic < 90 || systolic > 180) {
+      return 'Systolic value out of range (90-180).';
+    }
+    if (diastolic < 60 || diastolic > 120) {
+      return 'Diastolic value out of range (60-120).';
+    }
+    return null; // Valid input
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validate blood pressure
+    const bpValidationError = validateBloodPressure(bloodPressure);
+    if (bpValidationError) {
+      setErrorMessage(bpValidationError);
+      setSuccessMessage('');
+      return;
+    }
+
+    // Proceed if all inputs are filled
     if (heartRate && sugarLevel && bloodPressure) {
       try {
         const response = await fetch('http://localhost:3300/api/log', {
